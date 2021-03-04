@@ -17,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->listWidget, SIGNAL(customContextMenuRequested(const QPoint &)),
             this, SLOT(ProvideContextMenu(const QPoint &)));
 
+    this->setFixedSize(QSize(390, 644));
+
     QFontDatabase::addApplicationFont(":/fonts/TerminalVector.ttf");
 }
 
