@@ -9,6 +9,9 @@
 #include <QMessageBox>
 #include <QMenu>
 #include <QFontDatabase>
+#include <QList>
+#include <QPair>
+#include <QAbstractItemView>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -44,10 +47,17 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_listWidget_indexesMoved(const QModelIndexList &indexes);
+
+
+    void on_listWidget_itemEntered(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     QMap<int, QString> ourColors;
     int currentRow;
     QString currentName;
+    bool eventFilter(QObject *watched, QEvent *event);
+    void reorderList();
 };
 #endif // MAINWINDOW_H

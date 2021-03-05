@@ -17,7 +17,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->listWidget, SIGNAL(customContextMenuRequested(const QPoint &)),
             this, SLOT(ProvideContextMenu(const QPoint &)));
 
-    this->setFixedSize(QSize(390, 644));
+    this->setFixedSize(QSize(390, 635));
+
+    ui->listWidget->installEventFilter(this);
+
 
     QFontDatabase::addApplicationFont(":/fonts/TerminalVector.ttf");
 }
@@ -27,6 +30,32 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+bool MainWindow::eventFilter(QObject *watched, QEvent *event)
+{
+    if (watched == ui->listWidget)
+    {
+        if (event->type() == QEvent::ChildRemoved)
+        {
+            reorderList();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+void MainWindow::reorderList()
+{
+    ourColors.clear();
+
+    for (int i = 0; i < ui->listWidget->count(); ++i)
+    {
+        QListWidgetItem* curItem = ui->listWidget->item(i);
+        ourColors.insert(i, curItem->text());
+
+    }
+}
 
 void MainWindow::on_listWidget_itemChanged(QListWidgetItem *item)
 {
@@ -52,7 +81,7 @@ void MainWindow::on_btnNewColor_clicked()
 
 void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
-    QColor color = QColorDialog::getColor(Qt::white, this);
+    QColor color = QColorDialog::getColor(item->backgroundColor(), this);
     item->setBackgroundColor(color);
     item->setText(color.name());
 }
@@ -90,6 +119,7 @@ void MainWindow::saveToFile()
 {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save Colors"), "",
                                                     tr("Save Colors (*.clrs);;All Files (*)"));
+
 
     if (fileName.isEmpty())
         return;
@@ -159,4 +189,14 @@ void MainWindow::on_pushButton_2_clicked()
     msgBox.setText("ColorTool; keep track of your colors!");
     msgBox.setInformativeText("By Jessica Leyba, 2021, GPL v3, see license for more information");
     msgBox.exec();
+}
+
+void MainWindow::on_listWidget_indexesMoved(const QModelIndexList &indexes)
+{
+
+}
+
+void MainWindow::on_listWidget_itemEntered(QListWidgetItem *item)
+{
+
 }

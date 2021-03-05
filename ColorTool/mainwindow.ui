@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>390</width>
-    <height>644</height>
+    <height>635</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>390</width>
-    <height>644</height>
+    <height>635</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>390</width>
-    <height>644</height>
+    <height>635</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -44,14 +44,16 @@
       <x>20</x>
       <y>61</y>
       <width>351</width>
-      <height>561</height>
+      <height>550</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">QListView::item {
 	 height: 50px;
 	color: #ffffff;
- }</string>
+ }
+
+</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>
@@ -60,11 +62,11 @@
      <enum>QFrame::Plain</enum>
     </property>
    </widget>
-   <widget class="QWidget" name="" native="true">
+   <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>20</y>
+      <y>10</y>
       <width>350</width>
       <height>41</height>
      </rect>
@@ -83,14 +85,14 @@
      <item>
       <widget class="QPushButton" name="BtnSave">
        <property name="text">
-        <string>Save Colors</string>
+        <string>Save</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="BtnLoad">
        <property name="text">
-        <string>Load Colors</string>
+        <string>Load</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
